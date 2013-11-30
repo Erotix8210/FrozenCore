@@ -402,7 +402,7 @@ bool ChatHandler::HandleSaveAllCommand(const char* args, WorldSession* m_session
 	}
 	objmgr._playerslock.ReleaseReadLock();
 	char msg[100];
-	snprintf(msg, 100, "Saved all %u online players in %u msec.", count, now() - stime);
+	snprintf(msg, 100, "%s[PrisCore]%s Alle %u online Spieler gespeichert. Dauer: %u msec.", MSG_COLOR_GREEN, MSG_COLOR_LIGHTBLUE, count, now() - stime);
 	sWorld.SendWorldText(msg);
 	sWorld.SendWorldWideScreenText(msg);
 	sGMLog.writefromsession(m_session, "saved all players");
