@@ -265,7 +265,7 @@ void ConsoleSocket::OnRead()
 
 void ConsoleSocket::OnConnect()
 {
-	m_pConsole->Write("Welcome to ArcEmu's Remote Administration Console.\r\n");
+	m_pConsole->Write("Welcome to PrisCore's Remote Administration Console.\r\n");
 	m_pConsole->Write("Please authenticate to continue. \r\n\r\n");
 	m_pConsole->Write("login: ");
 }
