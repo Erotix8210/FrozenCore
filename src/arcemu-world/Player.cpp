@@ -44,17 +44,17 @@ static const uint8 glyphMask[81] =
 
 static const float crit_to_dodge[ MAX_PLAYER_CLASSES ] = {
 	0.0f,      // empty
-	1.1f,      // Warrior
-	1.0f,      // Paladin
-	1.6f,      // Hunter
-	2.0f,      // Rogue
-	1.0f,      // Priest
-	1.0f,      // DK?
-	1.0f,      // Shaman
-	1.0f,      // Mage
-	1.0f,      // Warlock
+	0.0f,      // Warrior
+	0.0f,      // Paladin
+	0.0f,      // Hunter
+	0.0f,      // Rogue
+	0.0f,      // Priest
+	0.0f,      // DK?
+	0.0f,      // Shaman
+	0.0f,      // Mage
+	0.0f,      // Warlock
 	0.0f,      // empty
-	1.7f       // Druid
+	0.0f       // Druid
 };
 
 Player::Player(uint32 guid)
