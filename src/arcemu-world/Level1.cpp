@@ -56,12 +56,6 @@ uint16 GetItemIDFromLink(const char* itemlink, uint32* itemid)
 
 bool ChatHandler::HandleAnnounceCommand(const char* args, WorldSession* m_session)
 {
-	if(!*args || strlen(args) < 4 || strchr(args, '%'))
-	{
-		m_session->SystemMessage("Announces cannot contain the %% character and must be at least 4 characters.");
-		return true;
-	}
-
 	char msg[1024];
 	string input2;
 	input2 = sWorld.ann_tagcolor;
@@ -71,8 +65,9 @@ bool ChatHandler::HandleAnnounceCommand(const char* args, WorldSession* m_sessio
 	input2 += sWorld.ann_gmtagcolor;
 	if(sWorld.GMAdminTag)
 	{
-		if(m_session->CanUseCommand('z')) input2 += "<Admin>";
-		else if(m_session->GetPermissionCount()) input2 += "<GM>";
+		if(m_session->CanUseCommand('z')) input2 += "<Projektleitung>";
+		else if(m_session->CanUseCommand('a')) input2 += "<Administrator>";
+		else if(m_session->GetPermissionCount()) input2 += "<GameMaster>";
 	}
 	if(sWorld.NameinAnnounce)
 	{
@@ -118,8 +113,9 @@ bool ChatHandler::HandleWAnnounceCommand(const char* args, WorldSession* m_sessi
 	input3 += sWorld.ann_gmtagcolor;
 	if(sWorld.GMAdminTag)
 	{
-		if(m_session->CanUseCommand('z')) input3 += "<Admin>";
-		else if(m_session->GetPermissionCount()) input3 += "<GM>";
+		if(m_session->CanUseCommand('z')) input3 += "<Projektleitung>";
+		else if(m_session->CanUseCommand('a')) input3 += "<Administrator>";
+		else if(m_session->GetPermissionCount()) input3 += "<GameMaster>";
 	}
 	if(sWorld.NameinWAnnounce)
 	{
