@@ -661,7 +661,7 @@ class SERVER_DECL SQLStorage : public Storage<T, StorageType>
 					Max = result->Fetch()[0].GetUInt32() + 1;
 					if(Max > STORAGE_ARRAY_MAX)
 					{
-						//Log.Error("Storage", "The table, '%s', has a maximum entry of %u, which is less %u. Any items higher than %u will not be loaded.",
+						Log.Error("Storage", "The table, '%s', has a maximum entry of %u, which is less %u. Any items higher than %u will not be loaded.",
 						          IndexName, Max, STORAGE_ARRAY_MAX, STORAGE_ARRAY_MAX);
 
 						Max = STORAGE_ARRAY_MAX;
@@ -726,7 +726,7 @@ class SERVER_DECL SQLStorage : public Storage<T, StorageType>
 					Max = result->Fetch()[0].GetUInt32() + 1;
 					if(Max > STORAGE_ARRAY_MAX)
 					{
-						//Log.Error("Storage", "The table, '%s', has a maximum entry of %u, which is less %u. Any items higher than %u will not be loaded.",
+						Log.Error("Storage", "The table, '%s', has a maximum entry of %u, which is less %u. Any items higher than %u will not be loaded.",
 						          IndexName, Max, STORAGE_ARRAY_MAX, STORAGE_ARRAY_MAX);
 
 						Max = STORAGE_ARRAY_MAX;
@@ -777,7 +777,7 @@ class SERVER_DECL SQLStorage : public Storage<T, StorageType>
 		 */
 		void Reload()
 		{
-			Log.Notice("Storage", "Reloading database cache from `%s`...", Storage<T, StorageType>::_indexName);
+			//Log.Notice("Storage", "Reloading database cache from `%s`...", Storage<T, StorageType>::_indexName);
 			QueryResult* result = WorldDatabase.Query("SELECT MAX(entry) FROM %s", Storage<T, StorageType>::_indexName);
 			if(result == 0)
 				return;

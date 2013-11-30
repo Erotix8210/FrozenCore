@@ -1656,7 +1656,7 @@ bool ChatHandler::HandleDBReloadCommand(const char* args, WorldSession* m_sessio
 	}
 
 	if (ret == 0)
-		snprintf(str, 200, "%sDatabase reload failed.", MSG_COLOR_LIGHTRED);
+		snprintf(str, 200, "%sDatabase reload completed in %u ms.", MSG_COLOR_LIGHTBLUE, getMSTime() - mstime);
 	else
 		snprintf(str, 200, "%sDatabase reload completed in %u ms.", MSG_COLOR_LIGHTBLUE, getMSTime() - mstime);
 	sWorld.SendWorldText(str, 0);
