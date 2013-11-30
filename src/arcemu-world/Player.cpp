@@ -5231,12 +5231,12 @@ void Player::ModAttackSpeed(int32 mod, ModType type)
 		return;
 
 	if(mod > 0)
-		m_attack_speed[ type ] *= 1.0f + ((float)mod / 100.0f);
+		m_attack_speed[ type ] *= 0.5f + ((float)mod / 100.0f);
 	else
-		m_attack_speed[ type ] /= 1.0f + ((float)(- mod) / 100.0f);
+		m_attack_speed[ type ] /= 0.5f + ((float)(- mod) / 100.0f);
 
 	if(type == MOD_SPELL)
-		SetCastSpeedMod(1.0f / (m_attack_speed[ MOD_SPELL ] * SpellHasteRatingBonus));
+		SetCastSpeedMod(0.5f / (m_attack_speed[ MOD_SPELL ] * SpellHasteRatingBonus));
 }
 
 void Player::UpdateAttackSpeed()
@@ -5259,14 +5259,14 @@ void Player::UpdateAttackSpeed()
 			speed = weap->GetProto()->Delay;
 	}
 	SetBaseAttackTime(MELEE,
-	                  (uint32)((float) speed / (m_attack_speed[ MOD_MELEE ] * (1.0f + CalcRating(PLAYER_RATING_MODIFIER_MELEE_HASTE) / 100.0f))));
+	                  (uint32)((float) speed / (m_attack_speed[ MOD_MELEE ] * (0.5f + CalcRating(PLAYER_RATING_MODIFIER_MELEE_HASTE) / 100.0f))));
 
 	weap = GetItemInterface()->GetInventoryItem(EQUIPMENT_SLOT_OFFHAND);
 	if(weap != NULL && weap->GetProto()->Class == ITEM_CLASS_WEAPON)
 	{
 		speed = weap->GetProto()->Delay;
 		SetBaseAttackTime(OFFHAND,
-		                  (uint32)((float) speed / (m_attack_speed[ MOD_MELEE ] * (1.0f + CalcRating(PLAYER_RATING_MODIFIER_MELEE_HASTE) / 100.0f))));
+		                  (uint32)((float) speed / (m_attack_speed[ MOD_MELEE ] * (0.5f + CalcRating(PLAYER_RATING_MODIFIER_MELEE_HASTE) / 100.0f))));
 	}
 
 	weap = GetItemInterface()->GetInventoryItem(EQUIPMENT_SLOT_RANGED);
@@ -5274,7 +5274,7 @@ void Player::UpdateAttackSpeed()
 	{
 		speed = weap->GetProto()->Delay;
 		SetBaseAttackTime(RANGED,
-		                  (uint32)((float) speed / (m_attack_speed[ MOD_RANGED ] * (1.0f + CalcRating(PLAYER_RATING_MODIFIER_RANGED_HASTE) / 100.0f))));
+		                  (uint32)((float) speed / (m_attack_speed[ MOD_RANGED ] * (0.5f + CalcRating(PLAYER_RATING_MODIFIER_RANGED_HASTE) / 100.0f))));
 	}
 }
 
@@ -5306,7 +5306,7 @@ void Player::UpdateStats()
 			if(GetShapeShift() == FORM_MOONKIN)
 			{
 				//(Strength x 2) + (Character Level x 1.5) - 20
-				AP += float2int32(static_cast<float>(lev) * 1.5f);
+				AP += float2int32(static_cast<float>(lev) * 1.25f);
 			}
 			if(GetShapeShift() == FORM_CAT)
 			{
@@ -5316,7 +5316,7 @@ void Player::UpdateStats()
 			if(GetShapeShift() == FORM_BEAR || GetShapeShift() == FORM_DIREBEAR)
 			{
 				//(Strength x 2) + (Character Level x 3) - 20
-				AP += (lev * 3);
+				AP += (lev * 2);
 			}
 			break;
 
@@ -5398,7 +5398,7 @@ void Player::UpdateStats()
 	int32 stat_bonus = GetUInt32Value(UNIT_FIELD_POSSTAT2) - GetUInt32Value(UNIT_FIELD_NEGSTAT2);
 	if(stat_bonus < 0)
 		stat_bonus = 0; // Avoid of having negative health
-	int32 bonus = stat_bonus * 10 + m_healthfromspell + m_healthfromitems;
+	int32 bonus = stat_bonus * 5 + m_healthfromspell + m_healthfromitems;
 
 	uint32 res = hp + bonus + hpdelta;
 	uint32 oldmaxhp = GetUInt32Value(UNIT_FIELD_MAXHEALTH);
@@ -5516,7 +5516,7 @@ void Player::UpdateStats()
 	if(shield != NULL && shield->GetProto()->InventoryType == INVTYPE_SHIELD)
 	{
 		float block_multiplier = (100.0f + m_modblockabsorbvalue) / 100.0f;
-		if(block_multiplier < 1.0f)block_multiplier = 1.0f;
+		if(block_multiplier < 0.5f)block_multiplier = 0.5f;
 
 		int32 blockable_damage = float2int32((shield->GetProto()->Block + m_modblockvaluefromspells + GetUInt32Value(PLAYER_RATING_MODIFIER_BLOCK) + (str / 2.0f) - 1.0f) * block_multiplier);
 		SetUInt32Value(PLAYER_SHIELD_BLOCK, blockable_damage);
