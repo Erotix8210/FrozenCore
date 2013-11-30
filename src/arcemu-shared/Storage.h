@@ -661,7 +661,7 @@ class SERVER_DECL SQLStorage : public Storage<T, StorageType>
 					Max = result->Fetch()[0].GetUInt32() + 1;
 					if(Max > STORAGE_ARRAY_MAX)
 					{
-						Log.Error("Storage", "The table, '%s', has a maximum entry of %u, which is less %u. Any items higher than %u will not be loaded.",
+						//Log.Error("Storage", "The table, '%s', has a maximum entry of %u, which is less %u. Any items higher than %u will not be loaded.",
 						          IndexName, Max, STORAGE_ARRAY_MAX, STORAGE_ARRAY_MAX);
 
 						Max = STORAGE_ARRAY_MAX;
@@ -707,7 +707,7 @@ class SERVER_DECL SQLStorage : public Storage<T, StorageType>
 				LoadBlock(fields, Allocated);
 			}
 			while(result->NextRow());
-			Log.Success("Storage", "%u entries loaded from table %s.", result->GetRowCount(), IndexName);
+			//Log.Success("Storage", "%u entries loaded from table %s.", result->GetRowCount(), IndexName);
 			delete result;
 
 			//Log.Success("Storage", "Loaded database cache from `%s`.", IndexName);
@@ -726,7 +726,7 @@ class SERVER_DECL SQLStorage : public Storage<T, StorageType>
 					Max = result->Fetch()[0].GetUInt32() + 1;
 					if(Max > STORAGE_ARRAY_MAX)
 					{
-						Log.Error("Storage", "The table, '%s', has a maximum entry of %u, which is less %u. Any items higher than %u will not be loaded.",
+						//Log.Error("Storage", "The table, '%s', has a maximum entry of %u, which is less %u. Any items higher than %u will not be loaded.",
 						          IndexName, Max, STORAGE_ARRAY_MAX, STORAGE_ARRAY_MAX);
 
 						Max = STORAGE_ARRAY_MAX;
@@ -769,7 +769,7 @@ class SERVER_DECL SQLStorage : public Storage<T, StorageType>
 				LoadBlock(fields, Allocated);
 			}
 			while(result->NextRow());
-			Log.Success("Storage", "%u entries loaded from table %s.", result->GetRowCount(), IndexName);
+			//Log.Success("Storage", "%u entries loaded from table %s.", result->GetRowCount(), IndexName);
 			delete result;
 		}
 

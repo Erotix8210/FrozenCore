@@ -78,7 +78,7 @@ ObjectMgr::~ObjectMgr()
 		delete i->second;
 	}
 
-	Log.Notice("ObjectMgr", "Deleting Trainers...");
+	 //Log.Notice("ObjectMgr", "Deleting Trainers...");
 	for(TrainerMap::iterator i = mTrainers.begin(); i != mTrainers.end(); ++ i)
 	{
 		Trainer* t = i->second;
@@ -389,7 +389,7 @@ void ObjectMgr::LoadSpellSkills()
 			mSpellSkills[sp->spell] = sp;
 		}
 	}
-	Log.Success("ObjectMgr", "%u spell skills loaded.", mSpellSkills.size());
+	//Log.Success("ObjectMgr", "%u spell skills loaded.", mSpellSkills.size());
 }
 
 skilllinespell* ObjectMgr::GetSpellSkill(uint32 id)
@@ -508,7 +508,7 @@ void ObjectMgr::LoadPlayersInfo()
 
 		delete result;
 	}
-	Log.Success("ObjectMgr", "%u players loaded.", m_playersinfo.size());
+	//Log.Success("ObjectMgr", "%u players loaded.", m_playersinfo.size());
 	LoadGuilds();
 }
 
@@ -676,7 +676,7 @@ void ObjectMgr::LoadPlayerCreateInfo()
 
 	delete result;
 
-	Log.Success("ObjectMgr", "%u player create infos loaded.", mPlayerCreateInfo.size());
+	//Log.Success("ObjectMgr", "%u player create infos loaded.", mPlayerCreateInfo.size());
 	GenerateLevelUpInfo();
 }
 
@@ -705,7 +705,7 @@ void ObjectMgr::LoadGuilds()
 		while(result->NextRow());
 		delete result;
 	}
-	Log.Success("ObjectMgr", "%u guilds loaded.", mGuild.size());
+	//Log.Success("ObjectMgr", "%u guilds loaded.", mGuild.size());
 }
 
 Corpse* ObjectMgr::LoadCorpse(uint32 guid)
@@ -817,7 +817,7 @@ void ObjectMgr::LoadGMTickets()
 	}
 	while(result->NextRow());
 
-	Log.Success("ObjectMgr", "%u active GM Tickets loaded.", result->GetRowCount());
+	//Log.Success("ObjectMgr", "%u active GM Tickets loaded.", result->GetRowCount());
 	delete result;
 }
 
@@ -875,7 +875,7 @@ void ObjectMgr::LoadInstanceBossInfos()
 	while(result->NextRow());
 
 	delete result;
-	Log.Success("ObjectMgr", "%u boss information loaded.", cnt);
+	//Log.Success("ObjectMgr", "%u boss information loaded.", cnt);
 }
 
 void ObjectMgr::SaveGMTicket(GM_Ticket* ticket, QueryBuffer* buf)
@@ -1122,7 +1122,7 @@ void ObjectMgr::ProcessGameobjectQuests()
 		while(result->NextRow());
 		delete result;
 	}
-	Log.Success("ObjectMgr", "%u NPC Gossip TextIds loaded.", mNpcToGossipText.size());
+	//Log.Success("ObjectMgr", "%u NPC Gossip TextIds loaded.", mNpcToGossipText.size());
 }
 
 Player* ObjectMgr::GetPlayer(const char* name, bool caseSensitive)
@@ -1412,7 +1412,7 @@ void ObjectMgr::LoadVendors()
 
 		delete result;
 	}
-	Log.Success("ObjectMgr", "%u vendors loaded.", mVendors.size());
+	//Log.Success("ObjectMgr", "%u vendors loaded.", mVendors.size());
 }
 
 void ObjectMgr::ReloadVendors()
@@ -1880,7 +1880,7 @@ void ObjectMgr::LoadTrainers()
 		result2 = WorldDatabase.Query("SELECT * FROM trainer_spells where entry='%u'", entry);
 		if(!result2)
 		{
-			Log.Error("LoadTrainers", "Trainer with no spells, entry %u.", entry);
+			//Log.Error("LoadTrainers", "Trainer with no spells, entry %u.", entry);
 			if(tr->UIMessage != NormalTalkMessage)
 				delete [] tr->UIMessage;
 
@@ -1889,7 +1889,7 @@ void ObjectMgr::LoadTrainers()
 		}
 		if(result2->GetFieldCount() != 9)
 		{
-			Log.LargeErrorMessage("Trainers table format is invalid. Please update your database.", NULL);
+			//Log.LargeErrorMessage("Trainers table format is invalid. Please update your database.", NULL);
 			delete tr;
 			delete result;
 			delete result2;
@@ -1989,7 +1989,7 @@ void ObjectMgr::LoadTrainers()
 	}
 	while(result->NextRow());
 	delete result;
-	Log.Success("ObjectMgr", "%u trainers loaded.", mTrainers.size());
+	//Log.Success("ObjectMgr", "%u trainers loaded.", mTrainers.size());
 }
 
 Trainer* ObjectMgr::GetTrainer(uint32 Entry)
@@ -2367,7 +2367,7 @@ void ObjectMgr::LoadSpellOverride()
 	}
 	while(result->NextRow());
 	delete result;
-	Log.Success("ObjectMgr", "%u spell overrides loaded.", mOverrideIdMap.size());
+	//Log.Success("ObjectMgr", "%u spell overrides loaded.", mOverrideIdMap.size());
 }
 
 void ObjectMgr::SetVendorList(uint32 Entry, std::vector<CreatureItem>* list_)
@@ -2643,7 +2643,7 @@ void ObjectMgr::LoadGuildCharters()
 	}
 	while(result->NextRow());
 	delete result;
-	Log.Success("ObjectMgr", "%u charters loaded.", m_charters[0].size());
+	//Log.Success("ObjectMgr", "%u charters loaded.", m_charters[0].size());
 }
 
 Charter* ObjectMgr::GetCharter(uint32 CharterId, CharterTypes Type)
@@ -2979,7 +2979,7 @@ void ObjectMgr::LoadMonsterSay()
 
 	}
 	while(result->NextRow());
-	Log.Success("ObjectMgr", "%u monster say events loaded.", result->GetRowCount());
+	//Log.Success("ObjectMgr", "%u monster say events loaded.", result->GetRowCount());
 	delete result;
 }
 
@@ -3023,7 +3023,7 @@ void ObjectMgr::LoadInstanceReputationModifiers()
 	}
 	while(result->NextRow());
 	delete result;
-	Log.Success("ObjectMgr", "%u instance reputation modifiers loaded.", m_reputation_instance.size());
+	//Log.Success("ObjectMgr", "%u instance reputation modifiers loaded.", m_reputation_instance.size());
 }
 
 bool ObjectMgr::HandleInstanceReputationModifiers(Player* pPlayer, Unit* pVictim)
@@ -3113,7 +3113,7 @@ void ObjectMgr::LoadGroups()
 		delete result;
 	}
 
-	Log.Success("ObjectMgr", "%u groups loaded.", this->m_groups.size());
+	//Log.Success("ObjectMgr", "%u groups loaded.", this->m_groups.size());
 }
 
 void ObjectMgr::LoadArenaTeams()

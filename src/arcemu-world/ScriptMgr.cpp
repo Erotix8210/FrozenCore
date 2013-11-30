@@ -251,8 +251,8 @@ void ScriptMgr::LoadScripts()
 	}
 	else
 	{
-		Log.Success("Server", "Loaded %u external libraries.", count);
-		Log.Success("Server", "Loading optional scripting engine(s)...");
+		//Log.Success("Server", "Loaded %u external libraries.", count);
+		//Log.Success("Server", "Loading optional scripting engine(s)...");
 
 		for(std::vector< ScriptingEngine_dl >::iterator itr = Engines.begin(); itr != Engines.end(); ++itr)
 		{
@@ -260,7 +260,7 @@ void ScriptMgr::LoadScripts()
 			dynamiclibs.push_back(itr->dl);
 		}
 
-		Log.Success("Server", "Done loading scripting engine(s)...");
+		//Log.Success("Server", "Done loading scripting engine(s)...");
 	}
 }
 
@@ -289,7 +289,7 @@ void ScriptMgr::DumpUnimplementedSpells()
 {
 	std::ofstream of;
 
-	LOG_BASIC("Dumping IDs for spells with unimplemented dummy/script effect(s)");
+	//LOG_BASIC("Dumping IDs for spells with unimplemented dummy/script effect(s)");
 	uint32 count = 0;
 
 	of.open("unimplemented1.txt");
@@ -320,9 +320,9 @@ void ScriptMgr::DumpUnimplementedSpells()
 
 	of.close();
 
-	LOG_BASIC("Dumped %u IDs.", count);
+	//LOG_BASIC("Dumped %u IDs.", count);
 
-	LOG_BASIC("Dumping IDs for spells with unimplemented dummy aura effect.");
+	//LOG_BASIC("Dumping IDs for spells with unimplemented dummy aura effect.");
 
 	std::ofstream of2;
 	of2.open("unimplemented2.txt");
@@ -351,13 +351,13 @@ void ScriptMgr::DumpUnimplementedSpells()
 
 	of2.close();
 
-	LOG_BASIC("Dumped %u IDs.", count);
+	//LOG_BASIC("Dumped %u IDs.", count);
 }
 
 void ScriptMgr::register_creature_script(uint32 entry, exp_create_creature_ai callback)
 {
 	if(_creatures.find(entry) != _creatures.end())
-		LOG_ERROR("ScriptMgr is trying to register a script for Creature ID: %u even if there's already one for that Creature. Remove one of those scripts.", entry);
+		//LOG_ERROR("ScriptMgr is trying to register a script for Creature ID: %u even if there's already one for that Creature. Remove one of those scripts.", entry);
 
 	_creatures.insert(CreatureCreateMap::value_type(entry, callback));
 }
@@ -365,7 +365,7 @@ void ScriptMgr::register_creature_script(uint32 entry, exp_create_creature_ai ca
 void ScriptMgr::register_gameobject_script(uint32 entry, exp_create_gameobject_ai callback)
 {
 	if(_gameobjects.find(entry) != _gameobjects.end())
-		LOG_ERROR("ScriptMgr is trying to register a script for GameObject ID: %u even if there's already one for that GameObject. Remove one of those scripts.", entry);
+		//LOG_ERROR("ScriptMgr is trying to register a script for GameObject ID: %u even if there's already one for that GameObject. Remove one of those scripts.", entry);
 
 	_gameobjects.insert(GameObjectCreateMap::value_type(entry, callback));
 }
@@ -374,7 +374,7 @@ void ScriptMgr::register_dummy_aura(uint32 entry, exp_handle_dummy_aura callback
 {
 	if(_auras.find(entry) != _auras.end())
 	{
-		LOG_ERROR("ScriptMgr is trying to register a script for Aura ID: %u even if there's already one for that Aura. Remove one of those scripts.", entry);
+		//LOG_ERROR("ScriptMgr is trying to register a script for Aura ID: %u even if there's already one for that Aura. Remove one of those scripts.", entry);
 	}
 
 	SpellEntry* sp = dbcSpell.LookupEntryForced(entry);
@@ -385,7 +385,7 @@ void ScriptMgr::register_dummy_aura(uint32 entry, exp_handle_dummy_aura callback
 	}
 
 	if(!sp->AppliesAura(SPELL_AURA_DUMMY) && !sp->AppliesAura(SPELL_AURA_PERIODIC_TRIGGER_DUMMY))
-		LOG_ERROR("ScriptMgr has registered a dummy aura handler for Spell ID: %u ( %s ), but spell has no dummy aura!", entry, sp->Name);
+		//LOG_ERROR("ScriptMgr has registered a dummy aura handler for Spell ID: %u ( %s ), but spell has no dummy aura!", entry, sp->Name);
 
 	_auras.insert(HandleDummyAuraMap::value_type(entry, callback));
 }
@@ -394,19 +394,19 @@ void ScriptMgr::register_dummy_spell(uint32 entry, exp_handle_dummy_spell callba
 {
 	if(_spells.find(entry) != _spells.end())
 	{
-		LOG_ERROR("ScriptMgr is trying to register a script for Spell ID: %u even if there's already one for that Spell. Remove one of those scripts.", entry);
+		//LOG_ERROR("ScriptMgr is trying to register a script for Spell ID: %u even if there's already one for that Spell. Remove one of those scripts.", entry);
 		return;
 	}
 
 	SpellEntry* sp = dbcSpell.LookupEntryForced(entry);
 	if(sp == NULL)
 	{
-		LOG_ERROR("ScriptMgr is trying to register a dummy handler for Spell ID: %u which is invalid.", entry);
+		//LOG_ERROR("ScriptMgr is trying to register a dummy handler for Spell ID: %u which is invalid.", entry);
 		return;
 	}
 
 	if(!sp->HasEffect(SPELL_EFFECT_DUMMY) && !sp->HasEffect(SPELL_EFFECT_SCRIPT_EFFECT) && !sp->HasEffect(SPELL_EFFECT_SEND_EVENT))
-		LOG_ERROR("ScriptMgr has registered a dummy handler for Spell ID: %u ( %s ), but spell has no dummy/script/send event effect!", entry, sp->Name);
+		//LOG_ERROR("ScriptMgr has registered a dummy handler for Spell ID: %u ( %s ), but spell has no dummy/script/send event effect!", entry, sp->Name);
 
 	_spells.insert(HandleDummySpellMap::value_type(entry, callback));
 }
@@ -427,7 +427,7 @@ void ScriptMgr::register_quest_script(uint32 entry, QuestScript* qs)
 	if(q != NULL)
 	{
 		if(q->pQuestScript != NULL)
-			LOG_ERROR("ScriptMgr is trying to register a script for Quest ID: %u even if there's already one for that Quest. Remove one of those scripts.", entry);
+			//LOG_ERROR("ScriptMgr is trying to register a script for Quest ID: %u even if there's already one for that Quest. Remove one of those scripts.", entry);
 
 		q->pQuestScript = qs;
 	}
@@ -438,7 +438,7 @@ void ScriptMgr::register_quest_script(uint32 entry, QuestScript* qs)
 void ScriptMgr::register_instance_script(uint32 pMapId, exp_create_instance_ai pCallback)
 {
 	if(mInstances.find(pMapId) != mInstances.end())
-		LOG_ERROR("ScriptMgr is trying to register a script for Instance ID: %u even if there's already one for that Instance. Remove one of those scripts.", pMapId);
+		//LOG_ERROR("ScriptMgr is trying to register a script for Instance ID: %u even if there's already one for that Instance. Remove one of those scripts.", pMapId);
 
 	mInstances.insert(InstanceCreateMap::value_type(pMapId, pCallback));
 };
@@ -490,19 +490,19 @@ void ScriptMgr::register_script_effect(uint32 entry, exp_handle_script_effect ca
 
 	if(itr != SpellScriptEffects.end())
 	{
-		LOG_ERROR("ScriptMgr tried to register more than 1 script effect handlers for Spell %u", entry);
+		//LOG_ERROR("ScriptMgr tried to register more than 1 script effect handlers for Spell %u", entry);
 		return;
 	}
 
 	SpellEntry* sp = dbcSpell.LookupEntryForced(entry);
 	if(sp == NULL)
 	{
-		LOG_ERROR("ScriptMgr tried to register a script effect handler for Spell %u, which is invalid.", entry);
+		//LOG_ERROR("ScriptMgr tried to register a script effect handler for Spell %u, which is invalid.", entry);
 		return;
 	}
 
 	if(!sp->HasEffect(SPELL_EFFECT_SCRIPT_EFFECT) && !sp->HasEffect(SPELL_EFFECT_SEND_EVENT))
-		LOG_ERROR("ScriptMgr has registered a script effect handler for Spell ID: %u ( %s ), but spell has no scripted effect!", entry, sp->Name);
+		//LOG_ERROR("ScriptMgr has registered a script effect handler for Spell ID: %u ( %s ), but spell has no scripted effect!", entry, sp->Name);
 
 	SpellScriptEffects.insert(std::pair< uint32, exp_handle_script_effect >(entry, callback));
 }
