@@ -862,6 +862,182 @@ void Spell::SpellEffectSchoolDMG(uint32 i) // dmg school
 						}
 				}
 			}break;
+			
+			case 845:
+			case 7369:
+			case 11608:
+			case 11609:
+			case 20569:
+			case 25231:
+			case 47519:
+			case 47520:
+			{
+				if(p_caster != NULL)
+				{
+					Item* itm = p_caster->GetItemInterface()->GetInventoryItem(EQUIPMENT_SLOT_MAINHAND);
+					if(p_caster->HasAura(12329))
+						dmg = (((itm->GetProto()->Damage[0].Min + itm->GetProto()->Damage[0].Max) * 0.2f) + m_spellInfo->EffectBasePoints[i]) * 0.4;
+					else if(p_caster->HasAura(12950))
+						dmg = (((itm->GetProto()->Damage[0].Min + itm->GetProto()->Damage[0].Max) * 0.2f) + m_spellInfo->EffectBasePoints[i]) * 0.8;
+					else if(p_caster->HasAura(20496))
+						dmg = (((itm->GetProto()->Damage[0].Min + itm->GetProto()->Damage[0].Max) * 0.2f) + m_spellInfo->EffectBasePoints[i]) * 1.2;
+					else
+						dmg = ((itm->GetProto()->Damage[0].Min + itm->GetProto()->Damage[0].Max) * 0.2f) + m_spellInfo->EffectBasePoints[i];
+				}
+			}break;
+			// Slam
+			case 1464:
+			case 8820:
+			case 11604:
+			case 11605:
+			case 25241:
+			case 25242:
+			case 47474:
+			case 47475:
+			{
+				if(p_caster != NULL)
+				{
+					Item* itm = p_caster->GetItemInterface()->GetInventoryItem(EQUIPMENT_SLOT_MAINHAND);
+					dmg = ((itm->GetProto()->Damage[0].Min + itm->GetProto()->Damage[0].Max) * 0.2f) + m_spellInfo->EffectBasePoints[i];
+				}
+			}break;
+			case 6343:
+			case 8198:
+			case 8204:
+			case 8205:
+			case 11580:
+			case 11581:
+			case 25264:
+			case 47501:
+			case 47502:
+			{
+				if(u_caster)
+					damage = float2int32((m_spellInfo->EffectBasePoints[0]+1)+ u_caster->GetAP() * 0.20f);
+			}break;
+			
+			case 20252:
+			{
+				if(p_caster != NULL)
+					dmg = p_caster->GetAP() * 0.12;
+			}break;
+			case 31898:
+			case 31804:
+			case 20187:
+			case 53733:
+			case 20425:
+			case 20467:
+			case 57774:
+			case 20268:
+			case 53726:
+			{
+				if(p_caster != NULL)
+				{
+					if(p_caster->HasAura(34258))
+						p_caster->CastSpell(TO_UNIT(p_caster), 34260, true);
+					if((p_caster->HasAura(53696) || p_caster->HasAura(53695)))
+						p_caster->CastSpell(TO_UNIT(p_caster), 68055, true);
+					if(p_caster->HasAura(37186))
+						dmg += 33;
+				}
+			}break;
+			case 53600:
+			case 61411:
+			{
+				if(p_caster != NULL)
+				{
+					Item* it = TO_ITEM(p_caster->GetItemInterface()->GetInventoryItem(EQUIPMENT_SLOT_OFFHAND));
+					if(it && it->GetProto() && it->GetProto()->InventoryType == INVTYPE_SHIELD)
+						dmg += float2int32(1.3f * p_caster->GetUInt32Value(PLAYER_SHIELD_BLOCK));
+				}
+			}break;
+			case 25742:
+			{
+				if(p_caster != NULL)
+					dmg += p_caster->GetUInt32Value(UNIT_FIELD_BASEATTACKTIME)/1000 * ((0.022 * (p_caster->GetAP()) + (0.044 * (p_caster->GetDamageDoneMod(1))))) + m_spellInfo->EffectBasePoints[i];
+			}break;
+			case 9799:
+			case 25988:
+			{
+				if(p_caster != NULL)
+				{
+					if(dmg > (p_caster->GetUInt32Value(UNIT_FIELD_MAXHEALTH)/2))
+						dmg = (p_caster->GetUInt32Value(UNIT_FIELD_MAXHEALTH)/2);
+				}
+			}break;
+			case 3044:
+			case 14281:
+			case 14282:
+			case 14283:
+			case 14284:
+			case 14285:
+			case 14286:
+			case 14287:
+			case 27019:
+			case 49044:
+			case 49045:
+			{
+				if(p_caster != NULL)
+				{
+					dmg = (p_caster->GetRAP() * 0.15) + m_spellInfo->EffectBasePoints[i];
+
+
+				}
+			}break;
+			case 19434:
+			case 20900:
+			case 20901:
+			case 20902:
+			case 20903:
+			case 20904:
+			case 27065:
+			case 49049:
+			case 49050:
+			{
+				if(p_caster != NULL)
+				{
+					Item* it = p_caster->GetItemInterface()->GetInventoryItem(EQUIPMENT_SLOT_RANGED);
+					dmg = ((it->GetProto()->Damage[0].Min + it->GetProto()->Damage[0].Max) * 0.2f) + m_spellInfo->EffectBasePoints[i];
+
+				}
+			}break;
+			case 53209:
+			{
+				if(p_caster != NULL)
+				{
+					Item* it = p_caster->GetItemInterface()->GetInventoryItem(EQUIPMENT_SLOT_RANGED);
+					dmg = ((it->GetProto()->Damage[0].Min + it->GetProto()->Damage[0].Max) * 0.2f) * 1.25;
+
+
+				}
+			}break;
+			case 56641:
+			case 34120:
+			case 49051:
+			case 49052:
+			{
+				if(p_caster != NULL)
+				{
+					Item* pItem = p_caster->GetItemInterface()->GetInventoryItem(EQUIPMENT_SLOT_RANGED);
+					ItemPrototype* pItemProto = ItemPrototypeStorage.LookupEntry(p_caster->GetUInt32Value(PLAYER_AMMO_ID));
+					uint32 stundmg;
+					float bowdmg;
+					float ammodmg;
+					if(unitTarget->IsDazed())
+						stundmg = p_caster->GetRAP()/10 + m_spellInfo->EffectBasePoints[i] + m_spellInfo->EffectBasePoints[i + 1];
+					else
+						stundmg = p_caster->GetRAP()/10 + m_spellInfo->EffectBasePoints[i];
+					if(pItem)
+						bowdmg = (pItem->GetProto()->Damage[0].Min + pItem->GetProto()->Damage[0].Max) * 0.2f;
+					else
+						bowdmg = 0;
+					if(pItemProto)
+						ammodmg = (pItemProto->Damage[0].Min + pItemProto->Damage[0].Max) * 0.2f;
+					else
+						ammodmg = 0;
+
+					dmg = float2int32(ammodmg + bowdmg) + stundmg;
+				}
+			}break;
 			case 64422: // Sonic Screech, Auriaya encounter
 			case 64688:
 				{
