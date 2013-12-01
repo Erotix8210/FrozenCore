@@ -761,6 +761,107 @@ void Spell::SpellEffectSchoolDMG(uint32 i) // dmg school
 
 		switch(GetProto()->Id)
 		{
+			case 23881: 
+			{
+				if(p_caster != NULL) 
+					dmg = p_caster->GetAP() * 0.5;
+			}break;
+			case 5308: 
+			case 20658:
+			case 20660:
+			case 20661:
+			case 20662:
+			case 25234:
+			case 25236:
+			case 47470:
+			case 47471:
+			{
+				if(p_caster != NULL)
+					dmg = p_caster->GetAP() * ((m_spellInfo->EffectBasePoints[0]+1) / 100);
+			}break;
+			case 23922:
+			case 23923: 
+			case 23924:
+			case 23925:
+			case 25258:
+			case 30356:
+			case 47487:
+			case 47488:
+			{
+				if(p_caster != NULL)
+				{
+					Item* it = TO_ITEM(p_caster->GetItemInterface()->GetInventoryItem(EQUIPMENT_SLOT_OFFHAND));
+					if(it && it->GetProto() && it->GetProto()->InventoryType == INVTYPE_SHIELD)
+						dmg += p_caster->GetUInt32Value(PLAYER_SHIELD_BLOCK);
+				}
+			}break;
+			case 34428: 
+			{
+				if(p_caster != NULL)
+				{
+					p_caster->RemoveFlag( UNIT_FIELD_AURASTATE, AURASTATE_FLAG_REJUVENATE );
+					dmg = (p_caster->GetAP()*(m_spellInfo->EffectBasePoints[i]+1)) / 100;
+				}
+			}break;
+			case 6572: 
+			case 6574:
+			case 7379:
+			case 11600:
+			case 11601:
+			case 25288:
+			case 25269:
+			case 30357:
+			case 57823:
+			{
+				if(p_caster != NULL)
+					dmg += (p_caster->GetAP() * 0.207);
+			}break;
+			case 57755: 
+			{
+				if(p_caster != NULL)
+					dmg = (p_caster->GetAP() * 0.5);
+			}break;
+			case 64382: 
+				dmg = (p_caster->GetAP() * 0.5);
+			break;
+			// Heroic Strike, commented ones don't have bonus.
+			/*case 78:
+			case 284:
+			case 285:
+			case 1608:
+			case 11564:
+			case 11565:
+			case 11566:
+			case 11567:
+			case 25286:*/
+			case 29707:
+			case 30324:
+			case 47449:
+			case 47450:
+			{
+				if(p_caster != NULL)
+				{
+					if(unitTarget->IsDazed())
+						for(uint32 i = UNIT_FIELD_AURASTATE; i < AURASTATE_FLAG_REJUVENATE; ++i)
+						{
+							switch(m_spellInfo->Id)
+							{ // This info isn't in the dbc files.....
+								case 29707:
+									dmg += 81.9;
+								break;
+								case 30324:
+									dmg += 110.95;
+								break;
+								case 47449:
+									dmg += 151.2;
+								break;
+								case 47450:
+									dmg += 173.25;
+								break;
+							}
+						}
+				}
+			}break;
 			case 64422: // Sonic Screech, Auriaya encounter
 			case 64688:
 				{
