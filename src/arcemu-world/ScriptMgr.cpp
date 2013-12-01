@@ -148,7 +148,7 @@ void ScriptMgr::LoadScripts()
 	if(HookInterface::getSingletonPtr() == NULL)
 		new HookInterface;
 
-	Log.Success("Server", "Loading External Script Libraries...");
+	//Log.Success("Server", "Loading External Script Libraries...");
 
 	std::string Path;
 	std::string FileMask;

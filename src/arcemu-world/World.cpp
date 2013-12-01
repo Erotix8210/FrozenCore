@@ -330,7 +330,7 @@ bool World::SetInitialWorldSettings()
 
 	uint32 start_time = getMSTime();
 
-	Log.Success("World", "Loading DBC files...");
+	//Log.Success("World", "Loading DBC files...");
 	if(!LoadDBCs())
 	{
 		Log.LargeErrorMessage("One or more of the DBC files are missing.", "These are absolutely necessary for the server to function.", "The server will not start without them.", NULL);
@@ -435,16 +435,16 @@ bool World::SetInitialWorldSettings()
 	sLocalizationMgr.Reload(false);
 
 	CommandTableStorage::getSingleton().Load();
-	Log.Success("WordFilter", "Loading...");
+	//Log.Success("WordFilter", "Loading...");
 
 	g_characterNameFilter = new WordFilter();
 	g_chatFilter = new WordFilter();
 	g_characterNameFilter->Load("wordfilter_character_names");
 	g_chatFilter->Load("wordfilter_chat");
 
-	Log.Success("WordFilter", "Done.");
+	//Log.Success("WordFilter", "Done.");
 
-	Log.Success("World", "Database loaded in %ums.", getMSTime() - start_time);
+	//Log.Success("World", "Database loaded in %ums.", getMSTime() - start_time);
 
 	if(Collision)
 	{
@@ -471,25 +471,25 @@ bool World::SetInitialWorldSettings()
 
 // ------------------------------------------------------------------------------------------------
 
-	Log.Success("World", "Starting Transport System...");
+	//Log.Success("World", "Starting Transport System...");
 	objmgr.LoadTransporters();
 
 	//Start the Achievement system :D
 #ifdef ENABLE_ACHIEVEMENTS
-	Log.Success("World", "Starting Achievement System..");
+	//Log.Success("World", "Starting Achievement System..");
 	objmgr.LoadAchievementCriteriaList();
 #endif
 	// start mail system
 	MailSystem::getSingleton().StartMailSystem();
 
-	Log.Success("World", "Starting Auction System...");
+	//Log.Success("World", "Starting Auction System...");
 	new AuctionMgr;
 	sAuctionMgr.LoadAuctionHouses();
 
 	m_queueUpdateTimer = mQueueUpdateInterval;
 	if(Config.MainConfig.GetBoolDefault("Startup", "BackgroundLootLoading", true))
 	{
-		Log.Notice("World", "Backgrounding loot loading...");
+		//Log.Notice("World", "Backgrounding loot loading...");
 
 		// loot background loading in a lower priority thread.
 		ThreadPool.ExecuteTask(new BasicTaskExecutor(new CallbackP0<LootMgr>(LootMgr::getSingletonPtr(), &LootMgr::LoadLoot),
@@ -497,12 +497,12 @@ bool World::SetInitialWorldSettings()
 	}
 	else
 	{
-		Log.Notice("World", "Loading loot in foreground...");
+		//Log.Notice("World", "Loading loot in foreground...");
 		lootmgr.LoadLoot();
 	}
 
 	Channel::LoadConfSettings();
-	Log.Success("BattlegroundManager", "Starting...");
+	//Log.Success("BattlegroundManager", "Starting...");
 	new CBattlegroundManager;
 
 	dw = new DayWatcherThread();
@@ -1133,7 +1133,7 @@ void TaskList::spawn()
 	else
 		threadcount = 1;
 
-	Log.Success("World", "Beginning %s server startup with %u threads.", (threadcount == 1) ? "progressive" : "parallel", threadcount);
+	//Log.Success("World", "Beginning %s server startup with %u threads.", (threadcount == 1) ? "progressive" : "parallel", threadcount);
 
 	for(uint32 x = 0; x < threadcount; ++x)
 		ThreadPool.ExecuteTask(new TaskExecutor(this));

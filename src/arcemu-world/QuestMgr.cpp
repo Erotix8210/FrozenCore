@@ -2260,7 +2260,7 @@ void QuestMgr::LoadExtraQuestStuff()
 			while(points->NextRow());
 
 			delete points;
-			Log.Success("QuestMgr", "%u quest Point Of Interest points loaded.", count);
+			//Log.Success("QuestMgr", "%u quest Point Of Interest points loaded.", count);
 		}
 
 	}

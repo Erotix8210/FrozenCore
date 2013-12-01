@@ -43,36 +43,36 @@ ObjectMgr::ObjectMgr() :
 
 ObjectMgr::~ObjectMgr()
 {
-	Log.Notice("ObjectMgr", "Deleting Corpses...");
+	//Log.Notice("ObjectMgr", "Deleting Corpses...");
 	CorpseCollectorUnload();
 
-	Log.Notice("ObjectMgr", "Deleting Itemsets...");
+	//Log.Notice("ObjectMgr", "Deleting Itemsets...");
 	for(ItemSetContentMap::iterator i = mItemSets.begin(); i != mItemSets.end(); ++i)
 	{
 		delete i->second;
 	}
 	mItemSets.clear();
 
-	Log.Notice("ObjectMgr", "Deleting PlayerCreateInfo...");
+	//Log.Notice("ObjectMgr", "Deleting PlayerCreateInfo...");
 	for(PlayerCreateInfoMap::iterator i = mPlayerCreateInfo.begin(); i != mPlayerCreateInfo.end(); ++ i)
 	{
 		delete i->second;
 	}
 	mPlayerCreateInfo.clear();
 
-	Log.Notice("ObjectMgr", "Deleting Guilds...");
+	//Log.Notice("ObjectMgr", "Deleting Guilds...");
 	for(GuildMap::iterator i = mGuild.begin(); i != mGuild.end(); ++i)
 	{
 		delete i->second;
 	}
 
-	Log.Notice("ObjectMgr", "Deleting Vendors...");
+	//Log.Notice("ObjectMgr", "Deleting Vendors...");
 	for(VendorMap::iterator i = mVendors.begin(); i != mVendors.end(); ++ i)
 	{
 		delete i->second;
 	}
 
-	Log.Notice("ObjectMgr", "Deleting Spell Override...");
+	//Log.Notice("ObjectMgr", "Deleting Spell Override...");
 	for(OverrideIdMap::iterator i = mOverrideIdMap.begin(); i != mOverrideIdMap.end(); ++i)
 	{
 		delete i->second;
@@ -87,7 +87,7 @@ ObjectMgr::~ObjectMgr()
 		delete t;
 	}
 
-	Log.Notice("ObjectMgr", "Deleting Level Information...");
+	//Log.Notice("ObjectMgr", "Deleting Level Information...");
 	for(LevelInfoMap::iterator i = mLevelInfo.begin(); i != mLevelInfo.end(); ++i)
 	{
 		LevelMap* l = i->second;
@@ -99,7 +99,7 @@ ObjectMgr::~ObjectMgr()
 		delete l;
 	}
 
-	Log.Notice("ObjectMgr", "Deleting Waypoint Cache...");
+	//Log.Notice("ObjectMgr", "Deleting Waypoint Cache...");
 	for(HM_NAMESPACE::hash_map<uint32, WayPointMap*>::iterator i = m_waypoints.begin(); i != m_waypoints.end(); ++i)
 	{
 		for(WayPointMap::iterator i2 = i->second->begin(); i2 != i->second->end(); ++i2)
