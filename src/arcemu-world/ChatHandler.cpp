@@ -326,18 +326,14 @@ void WorldSession::HandleMessagechatOpcode(WorldPacket & recv_data)
 			break;
 		case CHAT_MSG_OFFICER:
 			{
-				if(sChatHandler.ParseCommands(msg.c_str(), this) > 0)
-					break;
-
-				if(g_chatFilter->Parse(msg) == true)
-				{
-					SystemMessage("Your chat message was blocked by a server-side filter.");
-					return;
-				}
-
-				if(_player->m_playerInfo->guild)
-					_player->m_playerInfo->guild->OfficerChat(msg.c_str(), this, lang);
-
+			
+			char player[1024];
+		    Player * Plr = GetPlayer();
+		    if( Plr->GetTeam() == 1) 
+				snprintf(player, 1024, "%s[Weltenchat]:|r [%s%s|r]: %s%s|r", MSG_COLOR_ORANGE, MSG_COLOR_LIGHTRED, GetPlayer()->GetName(), MSG_COLOR_SEXGREEN, msg.c_str());
+			else
+			    snprintf(player, 1024, "%s[Weltenchat]:|r [%s%s|r]: %s%s|r", MSG_COLOR_ORANGE, MSG_COLOR_LIGHTBLUE, GetPlayer()->GetName(), MSG_COLOR_SEXGREEN, msg.c_str());
+			sWorld.SendWorldText(player);
 			}
 			break;
 		case CHAT_MSG_YELL:
