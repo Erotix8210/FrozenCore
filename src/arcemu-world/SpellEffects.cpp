@@ -1153,6 +1153,58 @@ void Spell::SpellEffectApplyAura(uint32 i)  // Apply Aura
 	{
 		pAura = itr->second;
 	}
+	switch(m_spellInfo->Id)
+	{
+		case 27907:
+		{
+			if(unitTarget->GetEntry() == 15941)
+			{
+				unitTarget->SendChatMessage(CHAT_MSG_MONSTER_SAY, LANG_UNIVERSAL, "What? Oh, not this again!");
+			}
+			else if(unitTarget->GetEntry() == 15945)
+			{
+				unitTarget->SendChatMessage(CHAT_MSG_MONSTER_SAY, LANG_UNIVERSAL, "You can't do this to me! We had a deal!");
+			}
+			else
+			{
+				SendCastResult(SPELL_FAILED_BAD_TARGETS);
+				return;
+			}
+		}break;
+		case 28880:
+		{
+			if(!p_caster)
+				break;
+                
+			if(unitTarget->GetEntry() == 16483)
+			{
+				unitTarget->RemoveAura(29152);
+				unitTarget->SetStandState(0);
+				static const char* testo[12] = {"None","Warrior", "Paladin", "Hunter", "Rogue", "Priest", "Death Knight", "Shaman", "Mage", "Warlock", "None", "Druid"};
+				char msg[150];
+				snprintf(msg, 150, "Many thanks to you %s. I'd best get to the crash site and see how I can help out. Until we meet again...", testo[p_caster->getClass()]);
+				unitTarget->SendChatMessage(CHAT_MSG_MONSTER_SAY, LANG_UNIVERSAL, msg);
+				((Creature*)unitTarget)->Despawn(900000, 300000);
+			}
+		}break;
+		case 38177:
+		{
+			if(!p_caster)
+				break;
+
+			if(unitTarget->GetEntry() == 21387)
+			{
+				((Creature*)unitTarget)->Despawn(5000, 360000);
+				p_caster->CastSpell(p_caster, 38178, true);
+			}
+			else
+			{
+				SendCastResult(SPELL_FAILED_BAD_TARGETS);
+				return;
+			}
+		}break;
+	}
+
 	pAura->AddMod(GetProto()->EffectApplyAuraName[i], damage, GetProto()->EffectMiscValue[i], i);
 
 }
