@@ -194,6 +194,41 @@ class HordeBat : public CreatureAIScript
 		}
 };
 
+class DragonhawkMasters : public CreatureAIScript
+{
+public:
+	ADD_CREATURE_FACTORY_FUNCTION(DragonhawkMasters)
+	DragonhawkMasters(Creature* pCreature) : CreatureAIScript(pCreature) {}
+
+	void OnCombatStart(Unit* mTarget)
+	{
+		LocationVector vect(GetUnit()->GetPositionX(), GetUnit()->GetPositionY(), GetUnit()->GetPositionZ(), GetUnit()->GetOrientation());
+		for(int i = 0; i < 2; ++i)
+		{
+			vect.x += RandomFloat(2.0f);
+			vect.y += RandomFloat(2.0f);
+		}
+	}
+};
+
+class NeutralMasters : public CreatureAIScript
+{
+public:
+	ADD_CREATURE_FACTORY_FUNCTION(NeutralMasters)
+	NeutralMasters(Creature* pCreature) : CreatureAIScript(pCreature) {}
+
+	void OnCombatStart(Unit* mTarget)
+	{
+		LocationVector vect(GetUnit()->GetPositionX(), GetUnit()->GetPositionY(), GetUnit()->GetPositionZ(), GetUnit()->GetOrientation());
+		for(int i = 0; i < 2; ++i)
+		{
+			vect.x += RandomFloat(2.0f);
+			vect.y += RandomFloat(2.0f);
+		}
+	}
+};
+
+
 class TyrandeWhisperwind : public CreatureAIScript
 {
 	public:
@@ -323,31 +358,11 @@ void SetupMiscCreatures(ScriptMgr* mgr)
 	mgr->register_creature_script(7728, &KirithAI::Create);
 
 	// Gryphon Master
-	mgr->register_creature_script(8609, &AllianceGryphon::Create);
-	mgr->register_creature_script(18931, &AllianceGryphon::Create);
-	mgr->register_creature_script(931, &AllianceGryphon::Create);
-	mgr->register_creature_script(4321, &AllianceGryphon::Create);
-	mgr->register_creature_script(7823, &AllianceGryphon::Create);
-	mgr->register_creature_script(12596, &AllianceGryphon::Create);
-	mgr->register_creature_script(2299, &AllianceGryphon::Create);
-	mgr->register_creature_script(2835, &AllianceGryphon::Create);
-	mgr->register_creature_script(2432, &AllianceGryphon::Create);
-	mgr->register_creature_script(352, &AllianceGryphon::Create);
-	mgr->register_creature_script(2409, &AllianceGryphon::Create);
-	mgr->register_creature_script(16822, &AllianceGryphon::Create);
-	mgr->register_creature_script(18809, &AllianceGryphon::Create);
-	mgr->register_creature_script(1573, &AllianceGryphon::Create);
-	mgr->register_creature_script(2859, &AllianceGryphon::Create);
-	mgr->register_creature_script(12617, &AllianceGryphon::Create);
-	mgr->register_creature_script(2941, &AllianceGryphon::Create);
-	mgr->register_creature_script(21107, &AllianceGryphon::Create);
-	mgr->register_creature_script(20234, &AllianceGryphon::Create);
-	mgr->register_creature_script(1571, &AllianceGryphon::Create);
-	mgr->register_creature_script(523, &AllianceGryphon::Create);
-	mgr->register_creature_script(1572, &AllianceGryphon::Create);
-	mgr->register_creature_script(18939, &AllianceGryphon::Create);
-	mgr->register_creature_script(8018, &AllianceGryphon::Create);
-	mgr->register_creature_script(24366, &AllianceGryphon::Create);
+	uint32 GryphonMasterIds[] = { 352, 523, 931, 1571, 1572, 1573, 2299, 2409, 2432, 2835, 2859,
+	2941, 4321, 7823, 8018, 8609, 12596, 12617, 16822, 17209, 18809, 18931, 18939, 19181, 20234,
+	21107, 6326, 6327, 24366, 23704, 26879, 23736, 23859, 24061, 26876, 26877, 226878, 26880, 0 };
+	mgr->register_creature_script(GryphonMasterIds, &AllianceGryphon::Create);
+ 
 
 	// Hippogryph Master
 	mgr->register_creature_script(18937, &AllianceHippogryph::Create);
