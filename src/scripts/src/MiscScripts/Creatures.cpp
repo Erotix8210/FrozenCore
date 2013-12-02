@@ -365,71 +365,33 @@ void SetupMiscCreatures(ScriptMgr* mgr)
  
 
 	// Hippogryph Master
-	mgr->register_creature_script(18937, &AllianceHippogryph::Create);
-	mgr->register_creature_script(6706, &AllianceHippogryph::Create);
-	mgr->register_creature_script(3841, &AllianceHippogryph::Create);
-	mgr->register_creature_script(15177, &AllianceHippogryph::Create);
-	mgr->register_creature_script(4267, &AllianceHippogryph::Create);
-	mgr->register_creature_script(18789, &AllianceHippogryph::Create);
-	mgr->register_creature_script(8019, &AllianceHippogryph::Create);
-	mgr->register_creature_script(22485, &AllianceHippogryph::Create);
-	mgr->register_creature_script(12577, &AllianceHippogryph::Create);
-	mgr->register_creature_script(18785, &AllianceHippogryph::Create);
-	mgr->register_creature_script(11138, &AllianceHippogryph::Create);
-	mgr->register_creature_script(12578, &AllianceHippogryph::Create);
-	mgr->register_creature_script(18788, &AllianceHippogryph::Create);
-	mgr->register_creature_script(10897, &AllianceHippogryph::Create);
-	mgr->register_creature_script(4407, &AllianceHippogryph::Create);
-	mgr->register_creature_script(4319, &AllianceHippogryph::Create);
-	mgr->register_creature_script(17554, &AllianceHippogryph::Create);
-	mgr->register_creature_script(17555, &AllianceHippogryph::Create);
-	mgr->register_creature_script(22935, &AllianceHippogryph::Create);
-	mgr->register_creature_script(3838, &AllianceHippogryph::Create);
-	mgr->register_creature_script(11800, &AllianceHippogryph::Create);
+	uint32 HippogryphMasterIds[] = { 3838, 3841, 4267, 4319, 4407, 6706, 8019, 10897, 11138, 11800, 12577, 12578,
+	15177, 17554, 17555, 18785, 18788, 18789, 18937, 22485, 22935, 22936, 22937, 26881, 30271, 0 };
+	mgr->register_creature_script(HippogryphMasterIds, &AllianceHippogryph::Create);
 
 	// Wyvern Master
-	mgr->register_creature_script(19558, &HordeWyvern::Create);
-	mgr->register_creature_script(11901, &HordeWyvern::Create);
-	mgr->register_creature_script(16587, &HordeWyvern::Create);
-	mgr->register_creature_script(6026, &HordeWyvern::Create);
-	mgr->register_creature_script(7824, &HordeWyvern::Create);
-	mgr->register_creature_script(3615, &HordeWyvern::Create);
-	mgr->register_creature_script(3310, &HordeWyvern::Create);
-	mgr->register_creature_script(12740, &HordeWyvern::Create);
-	mgr->register_creature_script(2861, &HordeWyvern::Create);
-	mgr->register_creature_script(2858, &HordeWyvern::Create);
-	mgr->register_creature_script(3305, &HordeWyvern::Create);
-	mgr->register_creature_script(20762, &HordeWyvern::Create);
-	mgr->register_creature_script(18808, &HordeWyvern::Create);
-	mgr->register_creature_script(18942, &HordeWyvern::Create);
-	mgr->register_creature_script(18807, &HordeWyvern::Create);
-	mgr->register_creature_script(8610, &HordeWyvern::Create);
-	mgr->register_creature_script(4317, &HordeWyvern::Create);
-	mgr->register_creature_script(10378, &HordeWyvern::Create);
-	mgr->register_creature_script(15178, &HordeWyvern::Create);
-	mgr->register_creature_script(22455, &HordeWyvern::Create);
-	mgr->register_creature_script(2995, &HordeWyvern::Create);
-	mgr->register_creature_script(6726, &HordeWyvern::Create);
-	mgr->register_creature_script(4312, &HordeWyvern::Create);
-	mgr->register_creature_script(1387, &HordeWyvern::Create);
-	mgr->register_creature_script(18953, &HordeWyvern::Create);
-	mgr->register_creature_script(2851, &HordeWyvern::Create);
-	mgr->register_creature_script(13177, &HordeWyvern::Create);
-	mgr->register_creature_script(12616, &HordeWyvern::Create);
-	mgr->register_creature_script(18930, &HordeWyvern::Create);
-	mgr->register_creature_script(11139, &HordeWyvern::Create);
-	mgr->register_creature_script(11900, &HordeWyvern::Create);
-	mgr->register_creature_script(19317, &HordeWyvern::Create);
-	mgr->register_creature_script(18791, &HordeWyvern::Create);
-	mgr->register_creature_script(4314, &HordeWyvern::Create);
-	mgr->register_creature_script(11899, &HordeWyvern::Create);
-	mgr->register_creature_script(8020, &HordeWyvern::Create);
+	uint32 WyvernMasterIds[] = { 1387, 2851, 2858, 2861, 2995, 3305, 3310, 3615, 4312, 4314, 4317, 6026, 6726,
+	7824, 8020, 8610, 10378, 11139, 11899, 11900, 11901, 12616, 12740, 13177,
+	15178, 16587, 18791, 18807, 18808, 18930, 18942, 18953, 19317, 19558, 20762,
+	24032, 25288, 26566, 26846, 26847, 26848, 26850, 26852, 26853, 29762, 31426, 0 };
+	mgr->register_creature_script(WyvernMasterIds, &HordeWyvern::Create);
+ 
 
 	// Bat Master
-	mgr->register_creature_script(12636, &HordeBat::Create);
-	mgr->register_creature_script(2226, &HordeBat::Create);
-	mgr->register_creature_script(4551, &HordeBat::Create);
-	mgr->register_creature_script(2389, &HordeBat::Create);
+	uint32 BatMasterIds[] = { 2226, 2389, 4551, 12636, 3575, 23816, 24155, 26844, 26845, 27344, 27842, 37915, 0 };
+	mgr->register_creature_script(BatMasterIds, &HordeBat::Create);
+
+	// Dragonhawk Masters
+	uint32 DragonhawkMasterIds[] = { 16189, 16192, 26560, 30269, 0 };
+	mgr->register_creature_script(DragonhawkMasterIds, &DragonhawkMasters::Create);
+
+	// Neutral Masters
+	uint32 NeutralMasterIds[] = { 10583, 11798, 11800, 16227, 18938, 18940, 19581, 19583, 20515,
+	21766, 22216, 22455, 22931, 23612, 24851, 29480, 26851, 27046, 28037, 28195, 28196, 28197,
+	28574, 28615, 28618, 28621, 28623, 28624, 28674, 29137, 29721, 29749, 29750, 29757, 29950,
+	29951, 29952, 30314, 30433, 30569, 30869, 30870, 31069, 31078, 32571, 33849, 37888, 0 };
+	mgr->register_creature_script(NeutralMasterIds, &NeutralMasters::Create);
+ 
 
 	mgr->register_creature_script(7999, &TyrandeWhisperwind::Create);
 	mgr->register_creature_script(17468, &ProphetVelen::Create);
