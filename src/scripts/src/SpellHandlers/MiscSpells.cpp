@@ -18,6 +18,7 @@
  *
  */
 
+#include "StdAfx.h"
 #include "Setup.h"
 
 bool FrostWarding(uint32 i, Spell* s)
