@@ -162,60 +162,32 @@ bool LeaderOfThePack(uint32 i, Aura* a, bool apply)
 
 void SetupDruidSpells(ScriptMgr* mgr)
 {
-	uint32 StarfallIds[] =
-	{
-		50286, // Rank 1
-		53196, // Rank 2
-		53197, // Rank 3
-		53198, // Rank 4
-		0,
-	};
-	mgr->register_dummy_spell(StarfallIds, &Starfall);
+	mgr->register_dummy_spell(50286, &Starfall); // Rank 1
+	mgr->register_dummy_spell(53196, &Starfall); // Rank 2
+	mgr->register_dummy_spell(53197, &Starfall); // Rank 3
+	mgr->register_dummy_spell(53198, &Starfall); // Rank 4
 
 	mgr->register_dummy_spell(34297, &ImprovedLeaderOfThePack);
 	mgr->register_dummy_spell(34300, &ImprovedLeaderOfThePack);
 
-	uint32 predatorystrikesids[] =
-	{
-		16972,
-		16974,
-		16975,
-		0
-	};
-	mgr->register_dummy_aura(predatorystrikesids, &PredatoryStrikes);
-
-	uint32 furorids[] =
-	{
-		17056,
-		17058,
-		17059,
-		17060,
-		17061,
-		0
-	};
-	mgr->register_dummy_aura(furorids, &Furor);
-
-	uint32 tranquilityids[] =
-	{
-		740,
-		8918,
-		9862,
-		9863,
-		26983,
-		48446,
-		48447,
-		0
-	};
-	mgr->register_dummy_aura(tranquilityids, &Tranquility);
-
-	uint32 lifebloomids[] =
-	{
-		33763,
-		48450,
-		48451,
-		0
-	};
-	mgr->register_dummy_aura(lifebloomids, &LifeBloom);
+	mgr->register_dummy_aura(16972, &PredatoryStrikes);
+	mgr->register_dummy_aura(16974, &PredatoryStrikes);
+	mgr->register_dummy_aura(16975, &PredatoryStrikes);
+	mgr->register_dummy_aura(17056, &Furor);
+	mgr->register_dummy_aura(17058, &Furor);
+	mgr->register_dummy_aura(17059, &Furor);
+	mgr->register_dummy_aura(17060, &Furor);
+	mgr->register_dummy_aura(17061, &Furor);
+	mgr->register_dummy_aura(740, &Tranquility);
+	mgr->register_dummy_aura(8918, &Tranquility);
+	mgr->register_dummy_aura(9862, &Tranquility);
+	mgr->register_dummy_aura(9863, &Tranquility);
+	mgr->register_dummy_aura(26983, &Tranquility);
+	mgr->register_dummy_aura(48446, &Tranquility);
+	mgr->register_dummy_aura(48447, &Tranquility);
+	mgr->register_dummy_aura(33763, &LifeBloom);
+	mgr->register_dummy_aura(48450, &LifeBloom);
+	mgr->register_dummy_aura(48451, &LifeBloom);
 
 	mgr->register_dummy_aura(17007, &LeaderOfThePack);
 }
