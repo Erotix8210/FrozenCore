@@ -162,7 +162,9 @@ class SERVER_DECL Group
 
 		ARCEMU_INLINE void SendPacketToAll(WorldPacket* packet) { SendPacketToAllButOne(packet, NULL); }
 		void SendPacketToAllButOne(WorldPacket* packet, Player* pSkipTarget);
-
+		
+		void SendPacketToAllInRange(Player* plr, WorldPacket* packet);
+		
 		ARCEMU_INLINE void OutPacketToAll(uint16 op, uint16 len, const void* data) { OutPacketToAllButOne(op, len, data, NULL); }
 		void OutPacketToAllButOne(uint16 op, uint16 len, const void* data, Player* pSkipTarget);
 
