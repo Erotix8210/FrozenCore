@@ -46,7 +46,7 @@ void ApplyNormalFixes()
 {
 	//Updating spell.dbc
 
-	Log.Success("World", "Processing %u spells...", dbcSpell.GetNumRows());
+	//Log.Success("World", "Processing %u spells...", dbcSpell.GetNumRows());
 
 	//checking if the DBCs have been extracted from an english client, based on namehash of spell 4, the first with a different name in non-english DBCs
 	SpellEntry* sp = dbcSpell.LookupEntry(4);
@@ -389,7 +389,7 @@ void ApplyNormalFixes()
 
 		switch(namehash)
 		{
-				//case SPELL_HASH_SANCTITY_AURA:
+			//case SPELL_HASH_SANCTITY_AURA:
 			case SPELL_HASH_DEVOTION_AURA:
 			case SPELL_HASH_RETRIBUTION_AURA:
 			case SPELL_HASH_CONCENTRATION_AURA:
@@ -1436,7 +1436,14 @@ void ApplyNormalFixes()
 	//////////////////////////////////////////
 
 	// Insert warrior spell fixes here
-
+	//Warrior: Death Wish
+ 	sp = dbcSpell.LookupEntryForced(12292);
+ 	if(sp != NULL)
+	{
+ 		sp->c_is_flags = SPELL_FLAG_IS_FORCEDBUFF;
+		sp->procChance = 100;
+	}
+	
 	/**********************************************************
 	 *	Arms
 	 **********************************************************/
@@ -2958,15 +2965,17 @@ void ApplyNormalFixes()
 	}
 	// Still related to shadowstep - prevent the trigger spells from breaking stealth.
 	sp = CheckAndReturnSpellEntry(44373);
-	if(sp)
+	if(sp != NULL)
 		sp->AttributesEx |= ATTRIBUTESEX_NOT_BREAK_STEALTH;
 	sp = CheckAndReturnSpellEntry(36563);
-	if(sp)
+	if(sp != NULL)
 		sp->AttributesEx |= ATTRIBUTESEX_NOT_BREAK_STEALTH;
 	sp = CheckAndReturnSpellEntry(36554);
 	if(sp != NULL)
 		sp->AttributesEx |= ATTRIBUTESEX_NOT_BREAK_STEALTH;
-
+	sp = CheckAndReturnSpellEntry(36554);
+ 	if(sp != NULL)	
+	
 	//rogue - Seal Fate
 	sp = CheckAndReturnSpellEntry(14186);
 	if(sp != NULL)
@@ -5511,6 +5520,138 @@ void ApplyNormalFixes()
 	if(sp != NULL)
 		sp->DurationIndex = 0;
 
+	sp = CheckAndReturnSpellEntry(61177); // Northrend Inscription Research
+	if(sp != NULL)
+	{
+		sp->Effect[1] = 0;
+		//sp->EffectBaseDice[1] = 0;
+		sp->EffectBasePoints[1] = 0;
+		sp->EffectImplicitTargetA[1] = 0;
+		sp->EffectDieSides[1] = 0;
+	}
+	sp = CheckAndReturnSpellEntry(61288); // Minor Inscription Research
+	if(sp != NULL)
+	{
+		sp->Effect[1] = 0;
+		//sp->EffectBaseDice[1] = 0;
+		sp->EffectBasePoints[1] = 0;
+		sp->EffectImplicitTargetA[1] = 0;
+		sp->EffectDieSides[1] = 0;
+	}
+	sp = CheckAndReturnSpellEntry(60893); // Northrend Alchemy Research
+	if(sp != NULL)
+	{
+		sp->Effect[1] = 0;
+		//sp->EffectBaseDice[1] = 0;
+		sp->EffectBasePoints[1] = 0;
+		sp->EffectImplicitTargetA[1] = 0;
+		sp->EffectDieSides[1] = 0;
+	}
+	sp = CheckAndReturnSpellEntry(46097); // Brutal Totem of Survival
+	if(sp != NULL)
+	{
+		sp->EffectSpellClassMask[0][0] = 0x00100000 | 0x10000000 | 0x80000000;
+		sp->EffectSpellClassMask[0][1] = 0x08000000;
+		sp->procFlags = PROC_ON_CAST_SPELL;
+		sp->EffectImplicitTargetA[1] = EFF_TARGET_SELF;
+	}
+	sp = CheckAndReturnSpellEntry(43860); // Totem of Survival
+	if(sp != NULL)
+	{
+		sp->EffectSpellClassMask[0][0] = 0x00100000 | 0x10000000 | 0x80000000;
+		sp->EffectSpellClassMask[0][1] = 0x08000000;
+		sp->procFlags = PROC_ON_CAST_SPELL;
+		sp->EffectImplicitTargetA[1] = EFF_TARGET_SELF;
+	}
+	sp = CheckAndReturnSpellEntry(43861); // Merciless Totem of Survival
+	if(sp != NULL)
+	{
+		sp->EffectSpellClassMask[0][0] = 0x00100000 | 0x10000000 | 0x80000000;
+		sp->EffectSpellClassMask[0][1] = 0x08000000;
+		sp->procFlags = PROC_ON_CAST_SPELL;
+		sp->EffectImplicitTargetA[1] = EFF_TARGET_SELF;
+	}
+	sp = CheckAndReturnSpellEntry(43862); // Vengeful Totem of Survival
+	if(sp != NULL)
+	{
+		sp->EffectSpellClassMask[0][0] = 0x00100000 | 0x10000000 | 0x80000000;
+		sp->EffectSpellClassMask[0][1] = 0x08000000;
+		sp->procFlags = PROC_ON_CAST_SPELL;
+		sp->EffectImplicitTargetA[1] = EFF_TARGET_SELF;
+	}
+	sp = CheckAndReturnSpellEntry(60564); // Savage Gladiator's Totem of Survival
+	if(sp != NULL)
+	{
+		sp->EffectSpellClassMask[0][0] = 0x00100000 | 0x10000000 | 0x80000000;
+		sp->EffectSpellClassMask[0][1] = 0x08000000;
+		sp->procFlags = PROC_ON_CAST_SPELL;
+		sp->EffectImplicitTargetA[1] = EFF_TARGET_SELF;
+		sp->Effect[1] = SPELL_EFFECT_TRIGGER_SPELL;
+		sp->EffectTriggerSpell[1] = 60565; // Savage Magic
+	}
+	sp = CheckAndReturnSpellEntry(60571); // Hateful Gladiator's Totem of Survival
+	if(sp != NULL)
+	{
+		sp->EffectSpellClassMask[0][0] = 0x00100000 | 0x10000000 | 0x80000000;
+		sp->EffectSpellClassMask[0][1] = 0x08000000;
+		sp->procFlags = PROC_ON_CAST_SPELL;
+		sp->EffectImplicitTargetA[1] = EFF_TARGET_SELF;
+		sp->Effect[1] = SPELL_EFFECT_TRIGGER_SPELL;
+		sp->EffectTriggerSpell[1] = 60566; // Hateful Magic
+	}
+	sp = CheckAndReturnSpellEntry(60572); // Deadly Gladiator's Totem of Survival
+	if(sp != NULL)
+	{
+		sp->EffectSpellClassMask[0][0] = 0x00100000 | 0x10000000 | 0x80000000;
+		sp->EffectSpellClassMask[0][1] = 0x08000000;
+		sp->procFlags = PROC_ON_CAST_SPELL;
+		sp->EffectImplicitTargetA[1] = EFF_TARGET_SELF;
+		sp->Effect[1] = SPELL_EFFECT_TRIGGER_SPELL;
+		sp->EffectTriggerSpell[1] = 60567; // Deadly Magic
+	}
+	sp = CheckAndReturnSpellEntry(37575); // ??
+	if(sp != NULL)
+	{
+		sp->EffectSpellClassMask[0][0] = 0x00100000 | 0x10000000 | 0x80000000;
+		sp->EffectSpellClassMask[0][1] = 0x08000000;
+		sp->procFlags = PROC_ON_CAST_SPELL;
+		sp->EffectImplicitTargetA[1] = EFF_TARGET_SELF;
+	}
+	sp = CheckAndReturnSpellEntry(60567); // Deadly Magic
+	if(sp != NULL)
+		sp->EffectImplicitTargetA[1] = EFF_TARGET_SELF;
+	sp = CheckAndReturnSpellEntry(46098); // Brutal Totem of Third WInd
+	if(sp != NULL)
+	{
+		sp->procFlags = PROC_ON_CAST_SPELL;
+		sp->EffectSpellClassMask[0][0] = 0x00000080;
+		sp->Effect[1] = SPELL_EFFECT_TRIGGER_SPELL;
+		sp->EffectTriggerSpell[1] = 46099; // Brutal Gladiator's Totem of the Third Wind
+	}
+	sp = CheckAndReturnSpellEntry(34138); // Totem of the Third Wind
+	if(sp != NULL)
+	{
+		sp->procFlags = PROC_ON_CAST_SPELL;
+		sp->EffectSpellClassMask[0][0] = 0x00000080;
+		sp->Effect[1] = SPELL_EFFECT_TRIGGER_SPELL;
+		sp->EffectTriggerSpell[1] = 34132; // Gladiator's Totem of the Third Wind
+	}
+	sp = CheckAndReturnSpellEntry(42370); // Merciless Totem of the Third WInd
+	if(sp != NULL)
+	{
+		sp->procFlags = PROC_ON_CAST_SPELL;
+		sp->EffectSpellClassMask[0][0] = 0x00000080;
+		sp->Effect[1] = SPELL_EFFECT_TRIGGER_SPELL;
+		sp->EffectTriggerSpell[1] = 42371; // Merciless Gladiator's Totem of the Third Wind
+	}
+	sp = CheckAndReturnSpellEntry(43728); // Vengeful Totem of Third WInd
+	if(sp != NULL)
+	{
+		sp->procFlags = PROC_ON_CAST_SPELL;
+		sp->EffectSpellClassMask[0][0] = 0x00000080;
+		sp->Effect[1] = SPELL_EFFECT_TRIGGER_SPELL;
+		sp->EffectTriggerSpell[1] = 43729; // Vengeful Gladiator's Totem of the Third Wind
+	}
 	//////////////////////////////////////////
 	// ITEMS								//
 	//////////////////////////////////////////
