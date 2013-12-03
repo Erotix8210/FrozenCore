@@ -10,7 +10,7 @@
 -- Local
 
 local kullerball_id 	= 60000
-local spell2ziel = Unit:RandomPlayer(0)
+local spell2ziel = Unit:GetRandomEnemy()
 
 
 local npc_buffs 		= 	{
@@ -143,7 +143,6 @@ Unit:RegisterEvent("Kullerball_Flammenstoss", 7000, 0)
 Unit:RegisterEvent("Kullerball_Schmettern", 12000, 0)
 Unit:RegisterEvent("Kullerball_Wirbeln", 30000, 0)
 Unit:RegisterEvent("Kullerball_Phase2", 50000, 0)
-end
 
 -- Funktion "Kullerball_Meteorschlag"
 function Kullerball_Meteorschlag(Unit, Event)
@@ -189,7 +188,7 @@ end
 
 -- Function "Kullerball_OnKilledTarget"
 function Kullerball_OnKilledTarget(Unit, Event) -- Funktion beim Spieler Takedown.
-	Unit:SendChatMessage(14, 0, ""..pPlayer:GetName..", du bist zu schwach!")
+	Unit:SendChatMessage(14, 0, "Schwach!")
 end
 
 -- Function "Kullerball_OnDied"
