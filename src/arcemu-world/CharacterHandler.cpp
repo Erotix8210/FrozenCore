@@ -1003,9 +1003,9 @@ void WorldSession::FullLogin(Player* plr)
 
 
 #ifdef WIN32
-	_player->BroadcastMessage("Server: %sPrisCore %s - %s-Windows-%s", MSG_COLOR_WHITE, BUILD_TAG, CONFIG, ARCH);
+	_player->BroadcastMessage("Server: %sFrozenCore %s - %s-Windows-%s", MSG_COLOR_WHITE, BUILD_TAG, CONFIG, ARCH);
 #else
-	_player->BroadcastMessage("Server: %sPrisCore %s - %s-%s", MSG_COLOR_WHITE, BUILD_TAG, PLATFORM_TEXT, ARCH);
+	_player->BroadcastMessage("Server: %sFrozenCore %s - %s-%s", MSG_COLOR_WHITE, BUILD_TAG, PLATFORM_TEXT, ARCH);
 #endif
 
 	// Revision

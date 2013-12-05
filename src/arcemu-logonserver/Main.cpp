@@ -25,7 +25,7 @@
 #endif
 #include "../arcemu-shared/arcemu_getopt.h"
 
-#define BANNER "PrisCore %s %s/%s-%s (%s) :: Logon Server"
+#define BANNER "FrozenCore %s %s/%s-%s (%s) :: Logon Server"
 
 #ifndef WIN32
 #include <sched.h>
