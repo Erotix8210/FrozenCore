@@ -3304,30 +3304,6 @@ bool ProtectingOurOwn(uint32 i, Spell* pSpell)
 	return true;
 }
 
-bool Whitebark_Memory(uint32 i, Spell* pSpell)
-{
-	Player* pPlayer = (Player*)pSpell->u_caster;
-	if(!pPlayer)
-		return true;
-
-	if(!pSpell->u_caster->IsPlayer())
-		return true;
-
-	QuestLogEntry* en = pPlayer->GetQuestLogForEntry(10166);
-	if(en == NULL)
-		return true;
-
-	Creature* WhitebarkSprit= pPlayer->GetMapMgr()->GetInterface()->GetCreatureNearestCoords(8187.786, -6337.986, 64.51,19456);
-	if (WhitebarkSprit==NULL )
-	{
-		Creature* WhitebarkSpawn= sEAS.SpawnCreature(pPlayer, 19456, 8187.786, -6337.986, 64.51, 3.369,120000);
-		WhitebarkSpawn->SetUInt32Value(UNIT_NPC_FLAGS, 0);
-		WhitebarkSpawn->SetUInt32Value(UNIT_FIELD_FACTIONTEMPLATE, 14);
-		WhitebarkSpawn->_setFaction();
-	}
-	return true;
-};
-
 void SetupQuestItems(ScriptMgr* mgr)
 {
 	mgr->register_dummy_spell(3607, &YennikuRelease);
@@ -3389,7 +3365,6 @@ void SetupQuestItems(ScriptMgr* mgr)
 	mgr->register_dummy_spell(45474, &RagefistTorch);
 	mgr->register_script_effect(13978, &SummonAquementas);		//http://www.wowhead.com/?quest=4005
 	mgr->register_dummy_spell(39371, &PrayerBeads);				//http://www.wowhead.com/?quest=10935
-	mgr->register_dummy_spell(33980, &Whitebark_Memory);
 
 	mgr->register_script_effect(29297, &CleansingVial);
 
